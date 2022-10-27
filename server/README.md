@@ -7,5 +7,5 @@ yarn install
 yarn server
 ```
 
-## Tasks
-1) Implement custom endpoint for marking single todo item as "done". Calling this endpoint sets `done` field to `true` and `finishedAt` field sets to current time. Use this new endpoint on client 
+To check API, see documentation of `json-server`. The only implemented endpoint is `/items`. 
+To see shape of object returned/expected by API, check `db.json` file.
