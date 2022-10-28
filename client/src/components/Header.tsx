@@ -9,8 +9,12 @@ export type HeaderProps = {
 
 const StyledDiv = styled.header`
     display: flex;
+    justify-content: space-between;
     button {
         all: unset;
+        display: flex;
+        justify-content: center;
+        align-items: center;    
         border-radius: 50%;
         border: 1px solid;
         border-color: ${(props) => props.theme.colors.olive9};
@@ -18,6 +22,11 @@ const StyledDiv = styled.header`
         color: #fff;
         width: 25px;
         height: 25px;
+    }
+    h1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 `;
 
