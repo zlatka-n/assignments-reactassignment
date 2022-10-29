@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { Checkbox } from "./Checkbox";
 import { CheckboxProps } from "@radix-ui/react-checkbox";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
+import { useHandleOpen } from "../hooks/useHandleOpen";
+import { Form } from "./form/Form";
+import { patchTodo } from "../api/axios";
 
 const StyledDiv = styled.div`
     display: flex;
@@ -23,21 +26,35 @@ export type LiteItemProp = CheckboxProps & {
     label: string;
     handleEdit: () => void;
     handleRemoval: () => void;
+    todoId: number
 };
 
-export const ListItem: React.FC<LiteItemProp> = ({ label, handleRemoval, handleEdit, ...checkboxProps }) => (
-    <StyledDiv>
-        <StyledContainer>
-            <Checkbox {...checkboxProps} />
-            <Label>{label}</Label>
-        </StyledContainer>
-        <div>
-        <button onClick={() => handleEdit()}>
-            <TrashIcon />
-        </button>
-        <button onClick={() => handleRemoval()}>
-            <Pencil1Icon />
-        </button>
-        </div>
-    </StyledDiv>
-);
+export const ListItem: React.FC<LiteItemProp> = ({ label, todoId, handleRemoval, handleEdit, ...checkboxProps }) => {
+    const { open, handleOpen, handleClose } = useHandleOpen()
+
+    const onClickEdit = useCallback((data: string) => {
+
+        patchTodo({title: data}, todoId)
+        handleClose()
+
+    }, [todoId])
+
+    return (
+        <StyledDiv>
+            <StyledContainer>
+                <Checkbox {...checkboxProps} />
+                <Label>{label}</Label>
+            </StyledContainer>            
+            {open ? <Form handleSubmit={(data) => onClickEdit(data)} handleCancel={handleClose} initialValue={label} /> : (
+                <div>
+                    <button onClick={handleOpen}>
+                    <Pencil1Icon />
+                    </button>
+                    <button onClick={() => handleEdit()}>
+                        <TrashIcon />
+                    </button>
+                </div>
+            )}
+        </StyledDiv>
+    );
+}
