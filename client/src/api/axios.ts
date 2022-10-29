@@ -25,3 +25,13 @@ export const postTodo = async(requestBody: PostTodo) => {
         throw err
     }
 }
+
+export const patchTodo = async(requestBody: Omit<PostTodo, 'done'>, id: number) => {
+
+    try {
+        await axiosInstance.patch<Omit<PostTodo, 'done'>>(`/items/${id}`, requestBody)
+    } catch (err: any) {
+        console.warn(err)
+        throw err
+    }
+}
