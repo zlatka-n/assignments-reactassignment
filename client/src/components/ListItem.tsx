@@ -7,10 +7,17 @@ import { useHandleOpen } from "../hooks/useHandleOpen";
 import { Form } from "./form/Form";
 import { deleteTodo, patchTodo } from "../api/axios";
 
+const StyledButtons = styled.div`
+    display: none
+`
+
 const StyledDiv = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 1rem;
+    &: hover ${StyledButtons} {
+        display: inline
+    }
 `;
 
 const StyledContainer = styled.div`
@@ -28,6 +35,7 @@ export type LiteItemProp = CheckboxProps & {
     handleRemoval: () => void;
     todoId: number
 };
+
 
 export const ListItem: React.FC<LiteItemProp> = ({ label, todoId, handleRemoval, handleEdit, ...checkboxProps }) => {
     const { open, handleOpen, handleClose } = useHandleOpen()
@@ -50,14 +58,14 @@ export const ListItem: React.FC<LiteItemProp> = ({ label, todoId, handleRemoval,
                 <Label>{label}</Label>
             </StyledContainer>            
             {open ? <Form handleSubmit={(data) => onClickEdit(data)} handleCancel={handleClose} initialValue={label} /> : (
-                <div>
+                <StyledButtons>
                     <button onClick={handleOpen}>
                     <Pencil1Icon />
                     </button>
                     <button onClick={onClickDelete}>
                         <TrashIcon />
                     </button>
-                </div>
+                </StyledButtons>
             )}
         </StyledDiv>
     );
