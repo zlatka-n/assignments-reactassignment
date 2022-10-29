@@ -5,7 +5,7 @@ import { CheckboxProps } from "@radix-ui/react-checkbox";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { useHandleOpen } from "../hooks/useHandleOpen";
 import { Form } from "./form/Form";
-import { patchTodo } from "../api/axios";
+import { deleteTodo, patchTodo } from "../api/axios";
 
 const StyledDiv = styled.div`
     display: flex;
@@ -39,6 +39,10 @@ export const ListItem: React.FC<LiteItemProp> = ({ label, todoId, handleRemoval,
 
     }, [todoId])
 
+    const onClickDelete = useCallback(() => {
+        deleteTodo(todoId)
+    },[todoId])
+
     return (
         <StyledDiv>
             <StyledContainer>
@@ -50,7 +54,7 @@ export const ListItem: React.FC<LiteItemProp> = ({ label, todoId, handleRemoval,
                     <button onClick={handleOpen}>
                     <Pencil1Icon />
                     </button>
-                    <button onClick={() => handleEdit()}>
+                    <button onClick={onClickDelete}>
                         <TrashIcon />
                     </button>
                 </div>

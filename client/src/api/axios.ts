@@ -35,3 +35,13 @@ export const patchTodo = async(requestBody: Omit<PostTodo, 'done'>, id: number) 
         throw err
     }
 }
+
+export const deleteTodo = async(id: number) => {
+
+    try {
+        await axiosInstance.delete(`/items/${id}`)
+    } catch (err: any) {
+        console.warn(err)
+        throw err
+    }
+}
