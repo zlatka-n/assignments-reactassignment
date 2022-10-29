@@ -32,14 +32,15 @@ export const App: React.FC = () => {
         return todos?.length - numberOfDone
     }, [todos])
 
+    const sortedTodos = useMemo(() => todos?.sort((x, y) => (x.done === y.done)? 0 : x.done? 1 : -1 && y.createdAt - x.createdAt), [todos])
 
     return (
         <ThemeProvider>
             <Container>
                 <Layout>
-                    <Header handleAddItem={useHandleOpen}>To Do app</Header>
+                    <Header handleAddItem={useHandleOpen}>Todo App</Header>
                     <List>
-                        {todos?.map(item => <ListItem label={item.title} key={item.id} todoId={item.id} checked={item.done} handleEdit={() => alert('todo edit')}  handleRemoval={() => alert('todo remove')}/>)}
+                        {sortedTodos?.map(item => <ListItem label={item.title} key={item.id} todoId={item.id} checked={item.done} handleEdit={() => alert('todo edit')}  handleRemoval={() => alert('todo remove')}/>)}
                     </List>
                     <Footer todoItems={numberOfTodo} doneItems={numberOfDone}/>
                 </Layout>
