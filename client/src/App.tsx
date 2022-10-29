@@ -14,8 +14,15 @@ export const App: React.FC = () => {
     const [todos, setTodos] = useState<TodoItems>()
 
     useEffect(() => {
-        getTodoItems().then(response => setTodos(response))
-    }, [todos])
+    
+        const interval = setInterval(()=>{
+            getTodoItems().then(response => {
+                setTodos(response)
+            })
+        },5000)
+       
+        return() => clearInterval(interval)
+    }, [])
 
     const numberOfDone = useMemo(() => todos?.filter(item => item.done).length, [todos])
 
@@ -32,7 +39,7 @@ export const App: React.FC = () => {
                 <Layout>
                     <Header handleAddItem={useHandleOpen}>To Do app</Header>
                     <List>
-                        {todos?.map(item => <ListItem label={item.title} key={item.id} checked={item.done} handleEdit={() => alert('todo edit')}  handleRemoval={() => alert('todo remove')}/>)}
+                        {todos?.map(item => <ListItem label={item.title} key={item.id} todoId={item.id} checked={item.done} handleEdit={() => alert('todo edit')}  handleRemoval={() => alert('todo remove')}/>)}
                     </List>
                     <Footer todoItems={numberOfTodo} doneItems={numberOfDone}/>
                 </Layout>
