@@ -4,3 +4,8 @@ export type TodoItems = {
     createdAt: number,
     id: number
 }[]
+
+export type PostTodo = {
+    title: string
+    done: boolean
+}
