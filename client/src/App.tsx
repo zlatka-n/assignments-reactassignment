@@ -19,7 +19,7 @@ export const App: React.FC = () => {
             getTodoItems().then(response => {
                 setTodos(response)
             })
-        },5000)
+        },2000)
        
         return() => clearInterval(interval)
     }, [])
@@ -27,7 +27,7 @@ export const App: React.FC = () => {
     const numberOfDone = useMemo(() => todos?.filter(item => item.done).length, [todos])
 
     const numberOfTodo = useMemo(() => {
-        if (!todos|| !numberOfDone) return
+        if (!todos || !numberOfDone) return
 
         return todos?.length - numberOfDone
     }, [todos])
