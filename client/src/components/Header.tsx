@@ -12,6 +12,7 @@ export type HeaderProps = {
 const StyledDiv = styled.header`
     display: flex;
     justify-content: space-between;
+    margin: 1rem;
     button {
         all: unset;
         display: flex;
@@ -29,6 +30,7 @@ const StyledDiv = styled.header`
         display: flex;
         flex-direction: column;
         justify-content: center;
+        font-weight: 600;
     }
 `;
 
