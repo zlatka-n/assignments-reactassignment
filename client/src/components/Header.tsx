@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { PlusIcon } from "@radix-ui/react-icons";
+import { Form } from "./form/Form";
+import { postTodo } from "../api/axios";
 
 export type HeaderProps = {
     children: React.ReactNode;
-    handleAddItem: () => void;
+    handleAddItem: () => { open: boolean, handleOpen: () => void, handleClose: () => void };
 };
 
 const StyledDiv = styled.header`
@@ -30,11 +32,22 @@ const StyledDiv = styled.header`
     }
 `;
 
-export const Header: React.FC<HeaderProps> = ({ handleAddItem, children }) => (
-    <StyledDiv>
-        <h1>{children}</h1>
-        <button onClick={() => handleAddItem()}>
-            <PlusIcon />
-        </button>
-    </StyledDiv>
-);
+
+export const Header: React.FC<HeaderProps> = ({ handleAddItem, children }) => {
+    const { open, handleOpen, handleClose } = handleAddItem()
+
+    const onClickAdd = (data: string) => {
+        
+        postTodo({title: data, done: false})
+        handleClose()
+    }
+
+    return (
+        <StyledDiv>
+            <h1>{children}</h1>
+            {open ? <Form handleSubmit={(data) => onClickAdd(data)} handleCancel={handleClose} initialValue='' /> : <button onClick={handleOpen}>
+                <PlusIcon />
+            </button>}
+        </StyledDiv>
+    );
+}
