@@ -13,17 +13,20 @@ const StyledDiv = styled.footer`
 `;
 
 const StyledText = styled.span`
-     font-weight: 700;
-`
+    font-weight: 700;
+`;
 
 export type FooterProps = {
     todoItems?: number;
     doneItems?: number;
 };
 export const Footer: React.FC<FooterProps> = ({ todoItems, doneItems }) => (
-    
     <StyledDiv>
-        <p>Todo: <StyledText>{todoItems ? todoItems : 0}</StyledText></p>
-        <p>Done: <StyledText>{doneItems ? doneItems : 0}</StyledText></p>
+        <p>
+            Todo: <StyledText>{todoItems ? todoItems : 0}</StyledText>
+        </p>
+        <p>
+            Done: <StyledText>{doneItems ? doneItems : 0}</StyledText>
+        </p>
     </StyledDiv>
 );

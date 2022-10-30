@@ -20,8 +20,8 @@ const emptyHandlers: Pick<LiteItemProp, "handleEdit" | "handleRemoval"> = {
 export const WithItems = Template.bind({});
 WithItems.args = {
     children: [
-        <ListItem {...emptyHandlers} label={"Lorem ipsum dolor"} todoId={1}/>,
-        <ListItem {...emptyHandlers} label={"Nullam Adipiscing Ridiculus Fusce"} todoId={2}/>,
-        <ListItem {...emptyHandlers} label={"Mattis Tristique Parturient "} todoId={3}/>,
+        <ListItem {...emptyHandlers} label={"Lorem ipsum dolor"} todoId={1} />,
+        <ListItem {...emptyHandlers} label={"Nullam Adipiscing Ridiculus Fusce"} todoId={2} />,
+        <ListItem {...emptyHandlers} label={"Mattis Tristique Parturient "} todoId={3} />,
     ],
 };

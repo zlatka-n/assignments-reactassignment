@@ -7,7 +7,7 @@ import { Button } from "./Button";
 
 export type HeaderProps = {
     children: React.ReactNode;
-    handleAddItem: () => { open: boolean, handleOpen: () => void, handleClose: () => void };
+    handleAddItem: () => { open: boolean; handleOpen: () => void; handleClose: () => void };
 };
 
 const StyledDiv = styled.header`
@@ -18,7 +18,7 @@ const StyledDiv = styled.header`
         all: unset;
         display: flex;
         justify-content: center;
-        align-items: center;    
+        align-items: center;
         border-radius: 50%;
         border: 1px solid;
         border-color: ${(props) => props.theme.colors.olive9};
@@ -35,21 +35,24 @@ const StyledDiv = styled.header`
     }
 `;
 
-
 export const Header: React.FC<HeaderProps> = ({ handleAddItem, children }) => {
-    const { open, handleOpen, handleClose } = handleAddItem()
+    const { open, handleOpen, handleClose } = handleAddItem();
 
     const onClickAdd = (data: string) => {
-        if (!data) return 
+        if (!data) return;
 
-        postTodo({title: data, done: false})
-        handleClose()
-    }
+        postTodo({ title: data, done: false });
+        handleClose();
+    };
 
     return (
         <StyledDiv>
             <h1>{children}</h1>
-            {open ? <Form handleSubmit={(data) => onClickAdd(data)} handleCancel={handleClose} initialValue='' /> : <Button onClick={handleOpen} icon={<PlusIcon />} />}
+            {open ? (
+                <Form handleSubmit={(data) => onClickAdd(data)} handleCancel={handleClose} initialValue="" />
+            ) : (
+                <Button onClick={handleOpen} icon={<PlusIcon />} />
+            )}
         </StyledDiv>
     );
-}
+};

@@ -9,15 +9,15 @@ import { deleteTodo, deleteTodoFromDone, patchTodo, postDoneTodo } from "../api/
 import { Button } from "./Button";
 
 const StyledButtonsDiv = styled.div`
-    display: none
-`
+    display: none;
+`;
 
 const StyledDiv = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 1rem;
     &: hover ${StyledButtonsDiv} {
-        display: inline
+        display: inline;
     }
 `;
 
@@ -34,42 +34,42 @@ export type LiteItemProp = CheckboxProps & {
     label: string;
     handleEdit?: () => void;
     handleRemoval?: () => void;
-    todoId: number
+    todoId: number;
 };
 
-
 export const ListItem: React.FC<LiteItemProp> = ({ label, todoId, handleRemoval, handleEdit, ...checkboxProps }) => {
-    const { open, handleOpen, handleClose } = useHandleOpen()
+    const { open, handleOpen, handleClose } = useHandleOpen();
 
-    const onClickEdit = useCallback((data: string) => {
-
-        patchTodo({title: data}, todoId)
-        handleClose()
-
-    }, [todoId])
+    const onClickEdit = useCallback(
+        (data: string) => {
+            patchTodo({ title: data }, todoId);
+            handleClose();
+        },
+        [todoId]
+    );
 
     const onClickDelete = useCallback(() => {
-        deleteTodo(todoId)
-    },[todoId])
-
+        deleteTodo(todoId);
+    }, [todoId]);
 
     const onClickCheckbox = (checked: CheckedState) => {
-
         // update for endpoint: /items
-        patchTodo({done: checked}, todoId)
-        
+        patchTodo({ done: checked }, todoId);
+
         // endpoint: /done
-        if (checked) postDoneTodo({title: label, done: checked, id: todoId})
-        if (!checked) deleteTodoFromDone(todoId)
-    }
+        if (checked) postDoneTodo({ title: label, done: checked, id: todoId });
+        if (!checked) deleteTodoFromDone(todoId);
+    };
 
     return (
         <StyledDiv>
             <StyledContainer>
-                <Checkbox {...checkboxProps} onCheckedChange={(checked: CheckedState) => onClickCheckbox(checked)}/>
+                <Checkbox {...checkboxProps} onCheckedChange={(checked: CheckedState) => onClickCheckbox(checked)} />
                 <Label>{label}</Label>
-            </StyledContainer>            
-            {open ? <Form handleSubmit={(data) => onClickEdit(data)} handleCancel={handleClose} initialValue={label} /> : (
+            </StyledContainer>
+            {open ? (
+                <Form handleSubmit={(data) => onClickEdit(data)} handleCancel={handleClose} initialValue={label} />
+            ) : (
                 <StyledButtonsDiv>
                     <Button onClick={handleOpen} icon={<Pencil1Icon />} />
                     <Button onClick={onClickDelete} icon={<TrashIcon />} />
@@ -77,4 +77,4 @@ export const ListItem: React.FC<LiteItemProp> = ({ label, todoId, handleRemoval,
             )}
         </StyledDiv>
     );
-}
+};

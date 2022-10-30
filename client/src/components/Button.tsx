@@ -1,16 +1,15 @@
-import React from 'react'
+import React from "react";
 
 type ButtonProps = {
-    onClick?: () =>void
-    type?: 'submit' | 'reset' | 'button'
-    icon: React.ReactNode
-}
+    onClick?: () => void;
+    type?: "submit" | "reset" | "button";
+    icon: React.ReactNode;
+};
 
-export const Button = ({onClick, type, icon}: ButtonProps) => {
-  return (
-    <button onClick={onClick} type={type}>
-        {icon}
-    </button>
-  )
-}
-
+export const Button = ({ onClick, type, icon }: ButtonProps) => {
+    return (
+        <button onClick={onClick} type={type}>
+            {icon}
+        </button>
+    );
+};

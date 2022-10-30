@@ -23,8 +23,8 @@ export const Form = (props: FormProps): JSX.Element => {
             }}
         >
             <Input initialValue={props.initialValue} handleInputChange={(value: string) => setData(value)} />
-            <Button type={"submit"} icon={<CheckIcon />}/>
-            <Button type={"reset"} icon={<Cross1Icon />}/>
+            <Button type={"submit"} icon={<CheckIcon />} />
+            <Button type={"reset"} icon={<Cross1Icon />} />
         </StyledForm>
     );
 };
