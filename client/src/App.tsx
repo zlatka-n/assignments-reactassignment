@@ -35,7 +35,7 @@ export const App: React.FC = () => {
                 <Layout>
                     <Header handleAddItem={useHandleOpen}>Todo App</Header>
                     <List>
-                        {sortedTodos?.map(item => <ListItem label={item.title} key={item.id} todoId={item.id} defaultChecked={item.done} handleEdit={() => alert('todo edit')}  handleRemoval={() => alert('todo remove')}/>)}
+                        {sortedTodos?.map(item => <ListItem label={item.title} key={item.id} todoId={item.id} defaultChecked={item.done} />)}
                     </List>
                     <Footer todoItems={numberOfTodos} doneItems={numberOfDone}/>
                 </Layout>
