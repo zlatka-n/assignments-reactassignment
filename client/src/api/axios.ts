@@ -45,3 +45,21 @@ export const deleteTodo = async(id: number) => {
         throw err
     }
 }
+
+export const postDoneTodo = async(requestBody: PostTodo) => {
+    try {
+        await axiosInstance.post<PostTodo>(`/done`, requestBody)
+    } catch (err: any) {
+        console.warn(err)
+        throw err
+    }
+}
+
+export const deleteTodoFromDone = async(id: number) => {
+    try {
+        await axiosInstance.delete<PostTodo>(`/done/${id}`)
+    } catch (err: any) {
+        console.warn(err)
+        throw err
+    }
+}
