@@ -1,13 +1,13 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { Checkbox } from "./Checkbox";
-import { CheckboxProps } from "@radix-ui/react-checkbox";
+import { CheckboxProps, CheckedState } from "@radix-ui/react-checkbox";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { useHandleOpen } from "../hooks/useHandleOpen";
 import { Form } from "./form/Form";
-import { deleteTodo, patchTodo } from "../api/axios";
+import { deleteTodo, deleteTodoFromDone, patchTodo, postDoneTodo } from "../api/axios";
 
-const StyledButtons = styled.div`
+const StyledButtonsDiv = styled.div`
     display: none
 `
 
@@ -15,7 +15,7 @@ const StyledDiv = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 1rem;
-    &: hover ${StyledButtons} {
+    &: hover ${StyledButtonsDiv} {
         display: inline
     }
 `;
@@ -51,21 +51,28 @@ export const ListItem: React.FC<LiteItemProp> = ({ label, todoId, handleRemoval,
         deleteTodo(todoId)
     },[todoId])
 
+
+    const onClickCheckbox = (checked: CheckedState) => {
+        if (checked) postDoneTodo({title: label, done: checked})
+
+        if (!checked) deleteTodoFromDone(todoId)
+    }
+
     return (
         <StyledDiv>
             <StyledContainer>
-                <Checkbox {...checkboxProps} />
+                <Checkbox {...checkboxProps} onCheckedChange={(checked: CheckedState) => onClickCheckbox(checked)}/>
                 <Label>{label}</Label>
             </StyledContainer>            
             {open ? <Form handleSubmit={(data) => onClickEdit(data)} handleCancel={handleClose} initialValue={label} /> : (
-                <StyledButtons>
+                <StyledButtonsDiv>
                     <button onClick={handleOpen}>
                     <Pencil1Icon />
                     </button>
                     <button onClick={onClickDelete}>
                         <TrashIcon />
                     </button>
-                </StyledButtons>
+                </StyledButtonsDiv>
             )}
         </StyledDiv>
     );
