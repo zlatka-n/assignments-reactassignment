@@ -39,7 +39,8 @@ export const Header: React.FC<HeaderProps> = ({ handleAddItem, children }) => {
     const { open, handleOpen, handleClose } = handleAddItem()
 
     const onClickAdd = (data: string) => {
-        
+        if (!data) return 
+
         postTodo({title: data, done: false})
         handleClose()
     }
