@@ -53,7 +53,10 @@ export const ListItem: React.FC<LiteItemProp> = ({ label, todoId, handleRemoval,
 
 
     const onClickCheckbox = (checked: CheckedState) => {
-        if (checked) postDoneTodo({title: label, done: checked})
+
+        patchTodo({done: checked}, todoId)
+        
+        if (checked) postDoneTodo({title: label, done: checked, id: todoId})
 
         if (!checked) deleteTodoFromDone(todoId)
     }
