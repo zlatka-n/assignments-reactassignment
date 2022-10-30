@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { Form } from "./form/Form";
 import { postTodo } from "../api/axios";
-import Button from "./Button";
+import { Button } from "./Button";
 
 export type HeaderProps = {
     children: React.ReactNode;

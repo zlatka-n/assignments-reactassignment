@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FormProps } from "./types";
 import { Input } from "./Input";
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
-import Button from "../Button";
+import { Button } from "../Button";
 
 const StyledForm = styled.form`
     display: flex;

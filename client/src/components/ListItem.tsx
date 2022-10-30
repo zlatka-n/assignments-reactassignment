@@ -6,7 +6,7 @@ import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { useHandleOpen } from "../hooks/useHandleOpen";
 import { Form } from "./form/Form";
 import { deleteTodo, deleteTodoFromDone, patchTodo, postDoneTodo } from "../api/axios";
-import Button from "./Button";
+import { Button } from "./Button";
 
 const StyledButtonsDiv = styled.div`
     display: none
@@ -32,8 +32,8 @@ const Label = styled.label`
 
 export type LiteItemProp = CheckboxProps & {
     label: string;
-    handleEdit: () => void;
-    handleRemoval: () => void;
+    handleEdit?: () => void;
+    handleRemoval?: () => void;
     todoId: number
 };
 
