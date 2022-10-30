@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PostTodo, TodoItems } from '../types';
+import { Todo, GetTodoItems } from '../types';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:3000',
@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 export const getTodoItems = async() => {
 
     try {
-        const { data } = await axiosInstance.get<TodoItems>(`/items`)
+        const { data } = await axiosInstance.get<GetTodoItems>(`/items`)
         return data
     } catch (err: any) {
         console.warn(err)
@@ -16,20 +16,20 @@ export const getTodoItems = async() => {
     }
 }
 
-export const postTodo = async(requestBody: PostTodo) => {
+export const postTodo = async(requestBody: Todo) => {
 
     try {
-        await axiosInstance.post<PostTodo>(`/items`, requestBody)
+        await axiosInstance.post<Todo>(`/items`, requestBody)
     } catch (err: any) {
         console.warn(err)
         throw err
     }
 }
 
-export const patchTodo = async(requestBody: Omit<PostTodo, 'done'>, id: number) => {
+export const patchTodo = async(requestBody: Todo, id: number) => {
 
     try {
-        await axiosInstance.patch<Omit<PostTodo, 'done'>>(`/items/${id}`, requestBody)
+        await axiosInstance.patch<Todo>(`/items/${id}`, requestBody)
     } catch (err: any) {
         console.warn(err)
         throw err
@@ -46,9 +46,9 @@ export const deleteTodo = async(id: number) => {
     }
 }
 
-export const postDoneTodo = async(requestBody: PostTodo) => {
+export const postDoneTodo = async(requestBody: Todo) => {
     try {
-        await axiosInstance.post<PostTodo>(`/done`, requestBody)
+        await axiosInstance.post<Todo>(`/done`, requestBody)
     } catch (err: any) {
         console.warn(err)
         throw err
@@ -57,7 +57,7 @@ export const postDoneTodo = async(requestBody: PostTodo) => {
 
 export const deleteTodoFromDone = async(id: number) => {
     try {
-        await axiosInstance.delete<PostTodo>(`/done/${id}`)
+        await axiosInstance.delete<Todo>(`/done/${id}`)
     } catch (err: any) {
         console.warn(err)
         throw err

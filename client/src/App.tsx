@@ -6,12 +6,12 @@ import { Footer } from "./components/Footer";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { useEffect, useMemo, useState } from 'react';
 import { getTodoItems } from "./api/axios";
-import { TodoItems } from "./types";
+import { GetTodoItems } from "./types";
 import { ListItem } from "./components/ListItem";
 import { useHandleOpen } from "./hooks/useHandleOpen";
 
 export const App: React.FC = () => {
-    const [todos, setTodos] = useState<TodoItems>([])
+    const [todos, setTodos] = useState<GetTodoItems>([])
 
     useEffect(() => {
     

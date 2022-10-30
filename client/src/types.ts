@@ -1,11 +1,12 @@
-export type TodoItems = {
+export type GetTodoItems = {
     title: string,
     done: boolean,
     createdAt: number,
     id: number
 }[]
 
-export type PostTodo = {
-    title: string
-    done: boolean
+export type Todo = {
+    title?: string
+    done?: boolean | string
+    id?: number
 }
