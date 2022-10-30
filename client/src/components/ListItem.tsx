@@ -6,6 +6,7 @@ import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { useHandleOpen } from "../hooks/useHandleOpen";
 import { Form } from "./form/Form";
 import { deleteTodo, deleteTodoFromDone, patchTodo, postDoneTodo } from "../api/axios";
+import Button from "./Button";
 
 const StyledButtonsDiv = styled.div`
     display: none
@@ -70,12 +71,8 @@ export const ListItem: React.FC<LiteItemProp> = ({ label, todoId, handleRemoval,
             </StyledContainer>            
             {open ? <Form handleSubmit={(data) => onClickEdit(data)} handleCancel={handleClose} initialValue={label} /> : (
                 <StyledButtonsDiv>
-                    <button onClick={handleOpen}>
-                    <Pencil1Icon />
-                    </button>
-                    <button onClick={onClickDelete}>
-                        <TrashIcon />
-                    </button>
+                    <Button onClick={handleOpen} icon={<Pencil1Icon />} />
+                    <Button onClick={onClickDelete} icon={<TrashIcon />} />
                 </StyledButtonsDiv>
             )}
         </StyledDiv>

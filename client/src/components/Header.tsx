@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { Form } from "./form/Form";
 import { postTodo } from "../api/axios";
+import Button from "./Button";
 
 export type HeaderProps = {
     children: React.ReactNode;
@@ -48,9 +49,7 @@ export const Header: React.FC<HeaderProps> = ({ handleAddItem, children }) => {
     return (
         <StyledDiv>
             <h1>{children}</h1>
-            {open ? <Form handleSubmit={(data) => onClickAdd(data)} handleCancel={handleClose} initialValue='' /> : <button onClick={handleOpen}>
-                <PlusIcon />
-            </button>}
+            {open ? <Form handleSubmit={(data) => onClickAdd(data)} handleCancel={handleClose} initialValue='' /> : <Button onClick={handleOpen} icon={<PlusIcon />} />}
         </StyledDiv>
     );
 }
