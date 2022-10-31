@@ -2,7 +2,7 @@
 
 Link to the repository where this assigment was created: [datamole-ai/assignments-reactassignment](https://github.com/datamole-ai/assignments-reactassignment) 
 
-### New npm packages:
+### New packages:
 * [axios](https://github.com/axios/axios)
 * [express-rate-limit](https://github.com/nfriedly/express-rate-limit)
 
