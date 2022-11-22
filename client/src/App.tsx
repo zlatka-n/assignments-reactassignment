@@ -14,14 +14,14 @@ export const App: React.FC = () => {
     const [todos, setTodos] = useState<GetTodoItems>([]);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            getTodoItems().then((response) => {
-                setTodos(response);
-            });
-        }, 2000);
-
-        return () => clearInterval(interval);
+        getTodoItems().then((response) => {
+            setTodos(response);
+        });
     }, []);
+
+    const getNewData = (newData: GetTodoItems) => {
+        setTodos(newData);
+    };
 
     const numberOfDone = todos?.filter((item) => item.done).length;
     const numberOfTodos = todos?.length && numberOfDone ? todos?.length - numberOfDone : todos?.length;
@@ -35,10 +35,12 @@ export const App: React.FC = () => {
         <ThemeProvider>
             <Container>
                 <Layout>
-                    <Header handleAddItem={useHandleOpen}>Todo App</Header>
+                    <Header handleAddItem={useHandleOpen} getNewData={getNewData}>
+                        Todo App
+                    </Header>
                     <List>
                         {sortedTodos?.map((item) => (
-                            <ListItem label={item.title} key={item.id} todoId={item.id} defaultChecked={item.done} />
+                            <ListItem label={item.title} key={item.id} todoId={item.id} defaultChecked={item.done} getNewData={getNewData}/>
                         ))}
                     </List>
                     <Footer todoItems={numberOfTodos} doneItems={numberOfDone} />

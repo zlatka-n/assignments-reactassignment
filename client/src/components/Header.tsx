@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { Form } from "./form/Form";
-import { postTodo } from "../api/axios";
+import { getTodoItems, postTodo } from "../api/axios";
 import { Button } from "./Button";
+import { GetTodoItems } from "../types";
 
 export type HeaderProps = {
     children: React.ReactNode;
     handleAddItem: () => { open: boolean; handleOpen: () => void; handleClose: () => void };
+    getNewData: (newData: GetTodoItems) => void;
 };
 
 const StyledDiv = styled.header`
@@ -35,13 +37,17 @@ const StyledDiv = styled.header`
     }
 `;
 
-export const Header: React.FC<HeaderProps> = ({ handleAddItem, children }) => {
+export const Header: React.FC<HeaderProps> = ({ handleAddItem, children, getNewData }) => {
     const { open, handleOpen, handleClose } = handleAddItem();
 
     const onClickAdd = (data: string) => {
         if (!data) return;
 
-        postTodo({ title: data, done: false });
+        postTodo({ title: data, done: false }).then((response) => {
+            return getTodoItems().then((response) => {
+                getNewData(response);
+            });
+        });
         handleClose();
     };
 
